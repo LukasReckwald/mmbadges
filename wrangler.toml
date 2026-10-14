@@ -2,6 +2,9 @@ name = "mmbadges"
 main = "worker/index.mjs"
 compatibility_date = "2026-09-01"
 
+# Cloudflare creates the DNS record and TLS certificate on deploy
+routes = [{ pattern = "mmbadges.com", custom_domain = true }]
+
 # The gallery (built by `npm run site:build`). Requests matching a file are served
 # directly as static assets (free, no worker invocation); everything else, like
 # /brand/… and /status/…, runs the worker.

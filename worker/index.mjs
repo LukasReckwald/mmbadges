@@ -143,8 +143,8 @@ export default {
     if (request.method !== 'GET' && request.method !== 'HEAD')
       return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
 
-    // Cloudflare edge cache. Note: the Cache API has no effect on *.workers.dev,
-    // it only works on a custom domain. Rendering is cheap anyway.
+    // Cloudflare edge cache (per data center). Note: the Cache API only works on the
+    // custom domain (mmbadges.com), not on *.workers.dev.
     const cache = caches.default;
     const key = new Request(cacheKey(new URL(request.url)));
     const hit = await cache.match(key);

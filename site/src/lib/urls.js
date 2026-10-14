@@ -19,7 +19,7 @@ function query(opts) {
 }
 
 /**
- * @param {string} base e.g. "https://mmbadges.mmbadges.workers.dev"
+ * @param {string} base e.g. "https://mmbadges.com"
  * @param {string} slug Simple Icons slug
  * @param {BadgeOptions} [opts]
  * @returns {string}

@@ -8,22 +8,19 @@ Modern minimal badges for Markdown. Clean pills, real brand logos (3000+ from [S
 
 ## Usage
 
-Pick a logo and copy the snippet in the **[gallery](https://mmbadges.mmbadges.workers.dev)**, or paste a URL into any Markdown file:
+Pick a logo and copy the snippet in the **[gallery](https://mmbadges.com)**, or paste a URL into any Markdown file:
 
 ```md
-![React](https://mmbadges.mmbadges.workers.dev/brand/react.svg)
-![build](https://mmbadges.mmbadges.workers.dev/status/si:githubactions/build/passing.svg?state=success)
+![React](https://mmbadges.com/brand/react.svg)
+![build](https://mmbadges.com/status/si:githubactions/build/passing.svg?state=success)
 ```
 
 By default (`theme=auto`) a badge contains both color palettes and follows the viewer's system color scheme. If you want badges to follow the **GitHub** theme setting exactly, use a `<picture>` element with fixed themes:
 
 ```html
 <picture>
-  <source
-    media="(prefers-color-scheme: dark)"
-    srcset="https://mmbadges.mmbadges.workers.dev/brand/react.svg?theme=dark"
-  />
-  <img src="https://mmbadges.mmbadges.workers.dev/brand/react.svg?theme=light" alt="React" />
+  <source media="(prefers-color-scheme: dark)" srcset="https://mmbadges.com/brand/react.svg?theme=dark" />
+  <img src="https://mmbadges.com/brand/react.svg?theme=light" alt="React" />
 </picture>
 ```
 
