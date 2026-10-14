@@ -48,7 +48,7 @@ Snapshot tests store the exact SVG output in `test/__snapshots__/`. If you chang
 npx vitest -u
 ```
 
-and mention the visual change in your pull request (a before/after screenshot helps). If a snapshot changes and you did not intend it, that's a bug.
+run `npm run examples` to refresh `docs/examples.svg` in the README, and mention the visual change in your pull request (a before/after screenshot helps). If a snapshot changes and you did not intend it, that's a bug.
 
 ## Pull requests
 

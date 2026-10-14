@@ -41,13 +41,15 @@ function lightColors(brand) {
     text: ensure(mix(brand, '#000000', 0.55), bg, 7, '#000000'),
   };
 }
+// Mirror of lightColors(): a dark background with a hint of the brand and a light brand shade for text
 function darkColors(brand) {
   if (isNearBlack(brand)) return { bg: DARK_BG, border: '#3d444d', logo: DARK_TEXT, text: DARK_TEXT };
+  const bg = mix(brand, DARK_BG, 0.84);
   return {
-    bg: DARK_BG,
-    border: ensure(mix(brand, DARK_BG, 0.55), DARK_BG, 1.6, '#ffffff'),
-    logo: ensure(brand, DARK_BG, 3, '#ffffff'),
-    text: DARK_TEXT,
+    bg,
+    border: ensure(mix(brand, DARK_BG, 0.55), bg, 1.6, '#ffffff'),
+    logo: ensure(brand, bg, 3, '#ffffff'),
+    text: ensure(mix(brand, '#ffffff', 0.45), bg, 7, '#ffffff'),
   };
 }
 
