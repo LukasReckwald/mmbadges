@@ -1,14 +1,12 @@
 # mmbadges
 
-**README badges that don't look like 2014.**
+Minimal badges for Markdown: pill-shaped, with brand logos from [Simple Icons](https://simpleicons.org), line icons from [Lucide](https://lucide.dev), and automatic light and dark mode from a single URL.
 
-Modern minimal badges for Markdown. Clean pills, real brand logos (3000+ from [Simple Icons](https://simpleicons.org)), clean line icons from [Lucide](https://lucide.dev), and automatic light and dark mode – from a single URL.
-
-> 🚧 Early development. The hosted service is not public yet; the base URL below is a placeholder.
+> 🚧 Early development – URLs and options may still change.
 
 ## Usage
 
-Pick a logo and copy the snippet in the **[gallery](https://mmbadges.com)**, or paste a URL into any Markdown file:
+Build a badge and copy the snippet on **[mmbadges.com](https://mmbadges.com)**, or paste a URL into any Markdown file:
 
 ```md
 ![React](https://mmbadges.com/brand/react.svg)

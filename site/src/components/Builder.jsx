@@ -46,38 +46,41 @@ export default function Builder() {
   const set = (key) => (value) => setOpts((o) => ({ ...o, [key]: value }));
 
   return (
-    <section id="builder" className="builder" aria-label="Badge builder">
-      <div className="tabs" role="tablist">
-        {TABS.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            role="tab"
-            aria-selected={tab === t.id}
-            disabled={t.soon}
-            className={tab === t.id ? 'active' : ''}
-            onClick={() => setTab(t.id)}
-          >
-            {t.title}
-            {t.soon && <span className="soon">soon</span>}
-          </button>
-        ))}
-      </div>
+    <section id="builder" className="workspace" aria-label="Badge builder">
+      <aside className="sidebar">
+        <div className="tabs" role="tablist" aria-label="Badge type">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              role="tab"
+              aria-selected={tab === t.id}
+              disabled={t.soon}
+              className={tab === t.id ? 'active' : ''}
+              onClick={() => setTab(t.id)}
+            >
+              {t.title}
+              {t.soon && <span className="soon">soon</span>}
+            </button>
+          ))}
+        </div>
 
-      <div className="builder-body">
         {tab === 'brand' ? (
           <BrandPanel state={brand} setState={setBrand} />
         ) : (
           <StatusPanel state={status} setState={setStatus} />
         )}
+
         <div className="controls">
           <Segmented label="Size" value={opts.size} options={['sm', 'md', 'lg']} onChange={set('size')} />
           <Segmented label="Theme" value={opts.theme} options={['auto', 'light', 'dark']} onChange={set('theme')} />
         </div>
-      </div>
+      </aside>
 
-      <Stage urlFor={badge.urlFor} theme={opts.theme} size={opts.size} alt={badge.alt} />
-      <SnippetBar alt={badge.alt} urlFor={badge.urlFor} theme={opts.theme} />
+      <div className="output">
+        <Stage urlFor={badge.urlFor} theme={opts.theme} size={opts.size} alt={badge.alt} />
+        <SnippetBar alt={badge.alt} urlFor={badge.urlFor} theme={opts.theme} />
+      </div>
     </section>
   );
 }

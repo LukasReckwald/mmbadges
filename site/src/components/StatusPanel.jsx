@@ -82,6 +82,7 @@ export default function StatusPanel({ state, setState }) {
         </label>
       </div>
       <Segmented
+        className="states"
         label={state.state === 'auto' ? 'State · auto: ≥ 80 % green, ≥ 60 % yellow, else red' : 'State'}
         value={state.state}
         options={['success', 'warning', 'danger', 'info', 'neutral', 'auto']}

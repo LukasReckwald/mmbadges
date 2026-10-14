@@ -1,7 +1,7 @@
 // A row of mutually exclusive buttons (like a radio group), e.g. mono | brand | tint
-export default function Segmented({ label, value, options, onChange }) {
+export default function Segmented({ label, value, options, onChange, className = '' }) {
   return (
-    <div className="field">
+    <div className={`field ${className}`}>
       <span className="field-label">{label}</span>
       <div className="segmented" role="radiogroup" aria-label={label}>
         {options.map((opt) => (

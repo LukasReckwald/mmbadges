@@ -2,16 +2,16 @@ const REPO = 'https://github.com/LukasReckwald/mmbadges';
 
 export default function Header() {
   return (
-    <div className="topbar">
-      <a href="/" className="wordmark" aria-label="mmbadges home">
+    <header className="topbar">
+      <a href="/" className="wordmark">
         <span className="wordmark-pill" aria-hidden="true" />
         mmbadges
       </a>
+      <span className="tagline">Badges for Markdown</span>
       <nav className="topnav">
-        <a href="#compare">Compare</a>
-        <a href="#usage">Docs</a>
+        <a href="#reference">Docs</a>
         <a href={REPO}>GitHub</a>
       </nav>
-    </div>
+    </header>
   );
 }
