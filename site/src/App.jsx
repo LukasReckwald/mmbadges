@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Builder from './components/Builder.jsx';
+import Comparison from './components/Comparison.jsx';
 import Header from './components/Header.jsx';
 import Reference from './components/Reference.jsx';
 
@@ -14,6 +15,7 @@ export default function App() {
       <Header />
       <main>
         <Builder />
+        <Comparison />
         <Reference />
       </main>
       <footer className="footer">

@@ -9,6 +9,7 @@ export default function Header() {
       </a>
       <span className="tagline">Badges for Markdown</span>
       <nav className="topnav">
+        <a href="#comparison">Comparison</a>
         <a href="#reference">Docs</a>
         <a href={REPO}>GitHub</a>
       </nav>

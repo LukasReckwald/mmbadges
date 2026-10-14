@@ -1,8 +1,42 @@
 # mmbadges
 
+[![license: MIT](https://mmbadges.com/status/lucide:scale/license/MIT.svg)](LICENSE)
+![JavaScript](https://mmbadges.com/brand/javascript.svg)
+![React](https://mmbadges.com/brand/react.svg)
+![Vite](https://mmbadges.com/brand/vite.svg)
+![Cloudflare Workers](https://mmbadges.com/brand/cloudflareworkers.svg)
+
 Minimal badges for Markdown: pill-shaped, with brand logos from [Simple Icons](https://simpleicons.org), line icons from [Lucide](https://lucide.dev), and automatic light and dark mode from a single URL.
 
 > 🚧 Early development – URLs and options may still change.
+
+## Examples
+
+All badges below come from mmbadges.com and switch between light and dark with your system theme.
+
+| Style   | Badges                                                                                                                                                                                                                                                                                                             |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `mono`  | ![React](https://mmbadges.com/brand/react.svg) ![TypeScript](https://mmbadges.com/brand/typescript.svg) ![Python](https://mmbadges.com/brand/python.svg) ![Rust](https://mmbadges.com/brand/rust.svg) ![Docker](https://mmbadges.com/brand/docker.svg)                                                             |
+| `brand` | ![React](https://mmbadges.com/brand/react.svg?style=brand) ![TypeScript](https://mmbadges.com/brand/typescript.svg?style=brand) ![Python](https://mmbadges.com/brand/python.svg?style=brand) ![Rust](https://mmbadges.com/brand/rust.svg?style=brand) ![Docker](https://mmbadges.com/brand/docker.svg?style=brand) |
+| `tint`  | ![React](https://mmbadges.com/brand/react.svg?style=tint) ![TypeScript](https://mmbadges.com/brand/typescript.svg?style=tint) ![Python](https://mmbadges.com/brand/python.svg?style=tint) ![Rust](https://mmbadges.com/brand/rust.svg?style=tint) ![Docker](https://mmbadges.com/brand/docker.svg?style=tint)      |
+
+| Status   | Badge                                                                                                                                                                                                                                                                                           |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| build    | ![build: passing](https://mmbadges.com/status/si:githubactions/build/passing.svg?state=success)                                                                                                                                                                                                 |
+| coverage | ![coverage: 87%](https://mmbadges.com/status/lucide:shield-check/coverage/87%25.svg?state=auto) ![coverage: 64%](https://mmbadges.com/status/lucide:shield-check/coverage/64%25.svg?state=auto) ![coverage: 41%](https://mmbadges.com/status/lucide:shield-check/coverage/41%25.svg?state=auto) |
+| version  | ![version: v1.4.2](https://mmbadges.com/status/lucide:tag/version/v1.4.2.svg?state=info)                                                                                                                                                                                                        |
+| license  | ![license: MIT](https://mmbadges.com/status/lucide:scale/license/MIT.svg)                                                                                                                                                                                                                       |
+
+### Comparison
+
+The same badges from [shields.io](https://shields.io) in its default style and from mmbadges. shields.io offers many more badge types and integrations; mmbadges focuses on a different look and automatic dark mode.
+
+| Badge          | shields.io                                                                                                   | mmbadges                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| React          | ![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)                              | ![React](https://mmbadges.com/brand/react.svg?style=brand)                                      |
+| TypeScript     | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)                | ![TypeScript](https://mmbadges.com/brand/typescript.svg?style=brand)                            |
+| build: passing | ![build: passing](https://img.shields.io/badge/build-passing-brightgreen?logo=githubactions&logoColor=white) | ![build: passing](https://mmbadges.com/status/si:githubactions/build/passing.svg?state=success) |
+| coverage: 94%  | ![coverage: 94%](https://img.shields.io/badge/coverage-94%25-brightgreen)                                    | ![coverage: 94%](https://mmbadges.com/status/lucide:shield-check/coverage/94%25.svg?state=auto) |
 
 ## Usage
 

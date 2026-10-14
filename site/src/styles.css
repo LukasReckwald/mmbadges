@@ -441,11 +441,19 @@ button:focus-visible {
   cursor: pointer;
 }
 
-/* ---------- Reference ---------- */
+/* ---------- Comparison and reference ---------- */
+.comparison td img {
+  display: block;
+}
+.comparison td {
+  vertical-align: middle;
+}
+.comparison,
 .reference {
   max-width: 760px;
   padding: 64px 0 0;
 }
+.comparison h2,
 .reference h2 {
   font-size: 18px;
   margin: 0 0 8px;
