@@ -7,7 +7,7 @@ export default function Header() {
         <span className="wordmark-pill" aria-hidden="true" />
         mmbadges
       </a>
-      <span className="tagline">Badges for Markdown</span>
+      <span className="tagline">Modern minimal badges for Markdown</span>
       <nav className="topnav">
         <a href="#comparison">Comparison</a>
         <a href="#reference">Docs</a>
