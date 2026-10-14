@@ -55,3 +55,12 @@ and mention the visual change in your pull request (a before/after screenshot he
 1. Run `npm run format` and `npm test` before pushing – CI checks both.
 2. Keep pull requests focused on one change.
 3. Write code comments, commit messages and docs in English.
+
+## Deployment (maintainers)
+
+`npm run deploy` builds the gallery and deploys the worker to `mmbadges.com`. The domain's DNS is managed by Cloudflare.
+`www.mmbadges.com` is attached to the worker only so Cloudflare creates its DNS record and certificate; a redirect rule
+in the dashboard (Rules → Redirect Rules → "Redirect from WWW to root") sends it to `mmbadges.com` before the worker runs.
+
+After changing routes, Cloudflare may serve old responses from its cache for a while – purge the cache in the dashboard
+(Caching → Purge Everything) if needed.
