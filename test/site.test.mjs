@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { brandUrl, statusUrl, snippet } from '../site/src/lib/urls.js';
+import { brandUrl, statusUrl, liveUrl, snippet } from '../site/src/lib/urls.js';
 import { searchBrands } from '../site/src/lib/search.js';
 import worker from '../worker/index.mjs';
 import { cacheKey } from '../worker/app.mjs';
@@ -38,6 +38,28 @@ describe('statusUrl', () => {
     const res = await worker.fetch(new Request(url), {}, { waitUntil: () => {} });
     expect(res.status).toBe(200);
     expect(await res.text()).toContain('aria-label="downloads: 12k / month"');
+  });
+});
+
+describe('liveUrl', () => {
+  it.each([
+    [
+      'actions',
+      { repo: 'acme/app', workflow: 'ci.yml', branch: 'main' },
+      '/github/actions/acme/app/ci.yml.svg?branch=main',
+    ],
+    ['stars', { repo: 'acme/app', branch: 'main' }, '/github/stars/acme/app.svg'],
+    ['npm', { pkg: '@acme/ui' }, '/npm/v/@acme/ui.svg'],
+    ['downloads', { pkg: 'left-pad', period: 'month' }, '/npm/dm/left-pad.svg'],
+    ['codecov', { repo: 'acme/app' }, '/codecov/acme/app.svg'],
+  ])('%s -> %s', (source, fields, path) => {
+    expect(liveUrl(BASE, source, fields)).toBe(`${BASE}${path}`);
+  });
+
+  it('keeps theme, size and label', () => {
+    expect(liveUrl(BASE, 'stars', { repo: 'acme/app' }, { theme: 'dark', label: 'Stars' })).toBe(
+      `${BASE}/github/stars/acme/app.svg?label=Stars&theme=dark`,
+    );
   });
 });
 

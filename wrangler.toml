@@ -13,7 +13,7 @@ routes = [
 # no worker invocation. Only badge routes run the worker.
 [assets]
 directory = "./site/dist"
-run_worker_first = ["/brand/*", "/status/*"]
+run_worker_first = ["/brand/*", "/status/*", "/github/*", "/npm/*", "/codecov/*"]
 
 # Exposes the deployment ID to the worker (used in the cache key)
 [version_metadata]

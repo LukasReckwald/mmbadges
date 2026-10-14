@@ -22,7 +22,7 @@ src/      pure render functions – no file system, no network, no CLI
   brands.mjs    brand badges
   status.mjs    status badges
 cli/      thin wrappers that write SVG files
-worker/   thin wrapper that serves SVGs over HTTP (Cloudflare Worker)
+worker/   serves SVGs over HTTP (Cloudflare Worker); live.mjs fetches GitHub, npm and Codecov values
 site/     gallery website (React + Vite), served as static assets by the same worker
   scripts/      builds the search index from simple-icons and lucide-static
   src/lib/      pure helpers (URLs, snippets, search) – tested in test/site.test.mjs
@@ -55,6 +55,16 @@ run `npm run examples` and `npm run banner` to refresh the README images in `doc
 1. Run `npm run format` and `npm test` before pushing – CI checks both.
 2. Keep pull requests focused on one change.
 3. Write code comments, commit messages and docs in English.
+
+## Live badges locally
+
+GitHub allows 60 unauthenticated API requests per hour. For more, put a token into `.dev.vars` (git-ignored):
+
+```
+GITHUB_TOKEN=github_pat_…
+```
+
+A fine-grained token with "Public repositories (read-only)" access and no permissions is enough.
 
 ## Deployment (maintainers)
 

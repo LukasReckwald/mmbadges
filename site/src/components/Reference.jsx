@@ -20,6 +20,20 @@ const ROUTES = [
   },
 ];
 
+// Live badges share the same options: label, size, theme (and branch where noted)
+const LIVE_ROUTES = [
+  [
+    '/github/actions/{owner}/{repo}/{workflow}.svg',
+    'Status of the latest workflow run. ?branch= defaults to the default branch.',
+  ],
+  ['/github/stars/{owner}/{repo}.svg', 'Star count.'],
+  ['/github/release/{owner}/{repo}.svg', 'Latest release tag.'],
+  ['/github/license/{owner}/{repo}.svg', 'License detected by GitHub.'],
+  ['/npm/v/{package}.svg', 'Latest npm version. Scoped: /npm/v/@scope/name.svg'],
+  ['/npm/dw/{package}.svg, /npm/dm/{package}.svg', 'Weekly / monthly npm downloads.'],
+  ['/codecov/{owner}/{repo}.svg', 'Coverage from Codecov, colored like state=auto. Supports ?branch='],
+];
+
 // Plain URL reference for people who prefer writing URLs by hand
 export default function Reference() {
   return (
@@ -55,6 +69,25 @@ export default function Reference() {
           </table>
         </div>
       ))}
+      <div className="route">
+        <code className="route-path">Live badges</code>
+        <p className="muted">
+          Values are fetched from GitHub, npm and Codecov and cached for 5 minutes. All of them accept label, size and
+          theme.
+        </p>
+        <table>
+          <tbody>
+            {LIVE_ROUTES.map(([path, about]) => (
+              <tr key={path}>
+                <td>
+                  <code>{path}</code>
+                </td>
+                <td>{about}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }

@@ -84,6 +84,25 @@ URL-encode special characters in path segments – `%` becomes `%25`, a space `%
 /status/lucide:shield-check/coverage/87%25.svg?state=auto
 ```
 
+### Live badges
+
+Values are fetched from GitHub, npm and Codecov and cached for 5 minutes. If an API is down, the last known value is shown. All live badges accept `label`, `size` and `theme`.
+
+| Route                                            | Shows                                                                               |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| `/github/actions/{owner}/{repo}/{workflow}.svg`  | Status of the latest run, e.g. `ci.yml`. `?branch=` defaults to the default branch. |
+| `/github/stars/{owner}/{repo}.svg`               | Star count, e.g. `2.4k`                                                             |
+| `/github/release/{owner}/{repo}.svg`             | Latest release tag                                                                  |
+| `/github/license/{owner}/{repo}.svg`             | License detected by GitHub                                                          |
+| `/npm/v/{package}.svg`                           | Latest npm version, scoped packages as `/npm/v/@scope/name.svg`                     |
+| `/npm/dw/{package}.svg`, `/npm/dm/{package}.svg` | Weekly / monthly npm downloads                                                      |
+| `/codecov/{owner}/{repo}.svg`                    | Coverage from Codecov, colored like `state=auto`. Supports `?branch=`.              |
+
+```md
+![build](https://mmbadges.com/github/actions/vitejs/vite/ci.yml.svg)
+![npm](https://mmbadges.com/npm/v/vite.svg)
+```
+
 Invalid requests still return an SVG (e.g. `badge: unknown logo`), so a README never shows a broken image.
 
 ## Generate files locally
@@ -116,7 +135,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the project structure and guidelines.
 
 - [x] Badge service on Cloudflare Workers
 - [x] Gallery website with search and copy buttons
-- [ ] Live badges (GitHub Actions, stars, npm, Codecov)
+- [x] Live badges (GitHub Actions, stars, releases, license, npm, Codecov)
 
 ## Credits
 

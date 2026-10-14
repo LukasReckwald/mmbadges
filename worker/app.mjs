@@ -3,6 +3,7 @@
 //
 //   /brand/{slug}.svg?theme=auto|light|dark&style=mono|brand|tint&size=sm|md|lg&label=Text
 //   /status/{icon}/{label}/{value}.svg?state=success|warning|danger|info|neutral|auto&theme=…&size=…
+//   /github/…, /npm/…, /codecov/…  live badges, see worker/live.mjs
 //
 // Every response is an SVG, errors included. A README never shows a broken image icon,
 // but a readable "badge | not found" instead.
@@ -12,6 +13,7 @@ import { renderStatus, STATES } from '../src/status.mjs';
 import { brandIcon, resolveIcon } from '../src/icons.mjs';
 import { THEMES } from '../src/lib.mjs';
 import { SIZES } from '../src/sizes.mjs';
+import { LIVE_ROOTS, LiveNotFound, UpstreamError, resolveLive } from './live.mjs';
 
 const REPO = 'https://github.com/LukasReckwald/mmbadges';
 const MAX_TEXT = 64; // reject longer labels/values so nobody can generate huge SVGs
@@ -23,7 +25,14 @@ const PARAMS = {
   style: { def: 'mono', values: STYLES },
   state: { def: 'neutral', values: STATES },
   label: { def: '', values: null },
+  branch: { def: '', values: null }, // live badges only
 };
+
+// Cache times: static badges never change, live values are re-fetched every 5 minutes
+const CACHE_STATIC = 'public, max-age=86400, s-maxage=604800';
+const CACHE_LIVE = 'public, max-age=300';
+const CACHE_ERROR = 'public, max-age=300';
+const CACHE_UPSTREAM_ERROR = 'public, max-age=60';
 
 class BadgeError extends Error {
   constructor(status, value) {
@@ -54,16 +63,35 @@ function segments(pathname) {
   }
 }
 
-function render(url) {
+async function render(url, env) {
   const parts = segments(url.pathname);
   if (!parts) throw new BadgeError(404, 'not found');
   const p = readParams(url.searchParams);
   const [kind, ...rest] = parts;
 
+  if (LIVE_ROOTS.includes(kind)) {
+    let live;
+    try {
+      live = await resolveLive(parts, p, env);
+    } catch (err) {
+      if (err instanceof LiveNotFound) throw new BadgeError(404, err.message);
+      throw err;
+    }
+    const svg = renderStatus({
+      icon: resolveIcon(live.icon),
+      label: p.label || live.label,
+      value: live.value,
+      state: live.state,
+      theme: p.theme,
+      size: p.size,
+    });
+    return { svg, live: true };
+  }
+
   if (kind === 'brand' && rest.length === 1) {
     const icon = brandIcon(rest[0]);
     if (!icon) throw new BadgeError(404, 'unknown logo');
-    return renderBrand({ icon, label: p.label || icon.title, theme: p.theme, style: p.style, size: p.size });
+    return { svg: renderBrand({ icon, label: p.label || icon.title, theme: p.theme, style: p.style, size: p.size }) };
   }
 
   if (kind === 'status' && rest.length === 3) {
@@ -71,7 +99,7 @@ function render(url) {
     if (label.length > MAX_TEXT || value.length > MAX_TEXT) throw new BadgeError(400, 'text too long');
     const icon = resolveIcon(spec);
     if (!icon) throw new BadgeError(404, 'unknown icon');
-    return renderStatus({ icon, label, value, state: p.state, theme: p.theme, size: p.size });
+    return { svg: renderStatus({ icon, label, value, state: p.state, theme: p.theme, size: p.size }) };
   }
 
   throw new BadgeError(404, 'not found');
@@ -88,7 +116,7 @@ function errorBadge(message, theme) {
   });
 }
 
-const svgHeaders = (cache) => ({
+const svgHeaders = (cache, extra = {}) => ({
   'Content-Type': 'image/svg+xml; charset=utf-8',
   'Cache-Control': cache,
   // SVGs can contain scripts. The CSP blocks everything except our inline <style>
@@ -96,6 +124,7 @@ const svgHeaders = (cache) => ({
   'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'",
   'X-Content-Type-Options': 'nosniff',
   'Access-Control-Allow-Origin': '*',
+  ...extra,
 });
 
 /**
@@ -118,27 +147,35 @@ export function cacheKey(url, version) {
 }
 
 /**
- * Build the response for a request (without caching).
+ * Build the response for a request (without caching). Live badges are marked with an
+ * "X-MM-Live" header and upstream failures with "X-MM-Upstream-Error", so the caching
+ * layer in worker/index.mjs can keep the last good value as a fallback.
  * @param {Request} request
- * @returns {Response}
+ * @param {{ GITHUB_TOKEN?: string }} [env]
+ * @returns {Promise<Response>}
  */
-export function handle(request) {
+export async function handle(request, env = {}) {
   const url = new URL(request.url);
   if (url.pathname === '/') {
     return new Response(`mmbadges – modern minimal badges for Markdown\n\n${REPO}\n`, {
       headers: { 'Content-Type': 'text/plain; charset=utf-8' },
     });
   }
+  const theme = url.searchParams.get('theme');
   try {
-    return new Response(render(url), {
-      headers: svgHeaders('public, max-age=86400, s-maxage=604800'),
+    const { svg, live } = await render(url, env);
+    return new Response(svg, {
+      headers: live ? svgHeaders(CACHE_LIVE, { 'X-MM-Live': '1' }) : svgHeaders(CACHE_STATIC),
     });
   } catch (err) {
+    if (err instanceof UpstreamError) {
+      return new Response(errorBadge(err.message, theme), {
+        status: 502,
+        headers: svgHeaders(CACHE_UPSTREAM_ERROR, { 'X-MM-Upstream-Error': '1' }),
+      });
+    }
     if (!(err instanceof BadgeError)) throw err;
     // cache errors only briefly, e.g. a logo might be added soon
-    return new Response(errorBadge(err.message, url.searchParams.get('theme')), {
-      status: err.status,
-      headers: svgHeaders('public, max-age=300'),
-    });
+    return new Response(errorBadge(err.message, theme), { status: err.status, headers: svgHeaders(CACHE_ERROR) });
   }
 }
