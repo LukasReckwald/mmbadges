@@ -3,21 +3,22 @@ import { brandUrl, statusUrl } from '../lib/urls.js';
 
 const SHIELDS = 'https://img.shields.io/badge';
 
-// The same information, rendered by shields.io (default "flat" style) and by mmbadges
+// The same information from shields.io – in the styles people commonly use: "for-the-badge"
+// for technology logos, the default "flat" for status badges – and from mmbadges
 const ROWS = [
   {
     name: 'React',
-    shields: `${SHIELDS}/React-20232A?logo=react&logoColor=61DAFB`,
+    shields: `${SHIELDS}/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB`,
     mm: brandUrl(BASE, 'react', { style: 'brand' }),
   },
   {
     name: 'TypeScript',
-    shields: `${SHIELDS}/TypeScript-3178C6?logo=typescript&logoColor=white`,
+    shields: `${SHIELDS}/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white`,
     mm: brandUrl(BASE, 'typescript', { style: 'brand' }),
   },
   {
     name: 'Docker',
-    shields: `${SHIELDS}/Docker-2496ED?logo=docker&logoColor=white`,
+    shields: `${SHIELDS}/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white`,
     mm: brandUrl(BASE, 'docker', { style: 'brand' }),
   },
   {
@@ -42,9 +43,9 @@ export default function Comparison() {
     <section id="comparison" className="comparison">
       <h2>Comparison</h2>
       <p className="muted">
-        The same badges from <a href="https://shields.io">shields.io</a> in its default style and from mmbadges.
-        shields.io has many more badge types and integrations; mmbadges focuses on a different look and automatic dark
-        mode.
+        The same badges from <a href="https://shields.io">shields.io</a>, in the styles they are most often used in
+        (for-the-badge for logos, the default flat style for status), and from mmbadges. shields.io has many more badge
+        types and integrations; mmbadges focuses on a different look and automatic dark mode.
       </p>
       <table>
         <thead>
