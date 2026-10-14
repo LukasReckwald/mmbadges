@@ -32,8 +32,7 @@ export function colors(brand, theme, style) {
 const isNearBlack = (h) => lum(h) < 0.02;
 
 function lightColors(brand) {
-  if (isNearBlack(brand))
-    return { bg: '#f6f8fa', border: '#d0d7de', logo: brand, text: '#1f2328' };
+  if (isNearBlack(brand)) return { bg: '#f6f8fa', border: '#d0d7de', logo: brand, text: '#1f2328' };
   const bg = mix(brand, '#ffffff', 0.88);
   return {
     bg,
@@ -43,8 +42,7 @@ function lightColors(brand) {
   };
 }
 function darkColors(brand) {
-  if (isNearBlack(brand))
-    return { bg: DARK_BG, border: '#3d444d', logo: DARK_TEXT, text: DARK_TEXT };
+  if (isNearBlack(brand)) return { bg: DARK_BG, border: '#3d444d', logo: DARK_TEXT, text: DARK_TEXT };
   return {
     bg: DARK_BG,
     border: ensure(mix(brand, DARK_BG, 0.55), DARK_BG, 1.6, '#ffffff'),
@@ -54,7 +52,16 @@ function darkColors(brand) {
 }
 
 // ---------- SVG ----------
-// icon = object from simple-icons (title, hex, path)
+/**
+ * Render a brand badge.
+ * @param {object} opts
+ * @param {{ title: string, hex: string, path: string }} opts.icon entry from simple-icons, see brandIcon()
+ * @param {string} [opts.label] defaults to the brand name
+ * @param {'auto' | 'light' | 'dark'} [opts.theme]
+ * @param {'mono' | 'brand' | 'tint'} [opts.style]
+ * @param {'sm' | 'md' | 'lg'} [opts.size]
+ * @returns {string} SVG document
+ */
 export function renderBrand({ icon, label = icon.title, theme = 'auto', style = 'mono', size = 'md' }) {
   const { H, PAD, ICON, GAP, FONT, WEIGHT } = getSize(size);
   const brand = '#' + icon.hex;

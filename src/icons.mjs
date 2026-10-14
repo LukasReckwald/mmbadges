@@ -8,11 +8,26 @@ import * as lucide from 'lucide-static';
 const bySlug = Object.fromEntries(Object.values(simpleIcons).map((i) => [i.slug, i]));
 
 // "shield-check" -> "ShieldCheck" (the export names used by lucide-static)
-const pascal = (name) => name.split('-').map((p) => p.charAt(0).toUpperCase() + p.slice(1)).join('');
+const pascal = (name) =>
+  name
+    .split('-')
+    .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+    .join('');
 
+/**
+ * Look up a Simple Icons entry by slug (case-insensitive).
+ * @param {string} slug e.g. "react", "nextdotjs"
+ * @returns {{ title: string, slug: string, hex: string, path: string } | undefined}
+ */
 export const brandIcon = (slug) => bySlug[slug.toLowerCase()];
 
-// Spec "si:<slug>" or "lucide:<name>" -> { type, body }, or null if unknown
+/** @typedef {{ type: 'si' | 'lucide', body: string }} Icon */
+
+/**
+ * Resolve an icon spec: "si:<slug>" (Simple Icons) or "lucide:<name>" (Lucide).
+ * @param {string} spec
+ * @returns {Icon | null} null if the icon is unknown
+ */
 export function resolveIcon(spec) {
   const [lib, name = ''] = spec.split(':');
   if (lib === 'si') {
@@ -29,8 +44,16 @@ export function resolveIcon(spec) {
   return null;
 }
 
-// Draw an icon at (x, y) with size `px`. `attr` sets the color
-// (fill for Simple Icons, stroke for Lucide), see paint() in lib.mjs.
+/**
+ * Draw an icon at (x, y) with size `px`. `attr` sets the color
+ * (fill for Simple Icons, stroke for Lucide), see paint() in lib.mjs.
+ * @param {Icon} icon
+ * @param {string} attr e.g. 'fill="#1f2328"' or 'class="mm-logo"'
+ * @param {number} x
+ * @param {number} y
+ * @param {number} px icon size in pixels
+ * @returns {string} SVG markup
+ */
 export function iconMarkup(icon, attr, x, y, px) {
   const s = px / 24;
   if (icon.type === 'si') return `<path transform="translate(${x} ${y}) scale(${s})" ${attr} d="${icon.body}"/>`;

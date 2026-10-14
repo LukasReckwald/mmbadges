@@ -78,7 +78,13 @@ function render(url) {
 
 function errorBadge(message, theme) {
   const t = THEMES.includes(theme) ? theme : 'auto';
-  return renderStatus({ icon: resolveIcon('lucide:circle-alert'), label: 'badge', value: message, state: 'danger', theme: t });
+  return renderStatus({
+    icon: resolveIcon('lucide:circle-alert'),
+    label: 'badge',
+    value: message,
+    state: 'danger',
+    theme: t,
+  });
 }
 
 const svgHeaders = (cache) => ({
@@ -91,8 +97,12 @@ const svgHeaders = (cache) => ({
   'Access-Control-Allow-Origin': '*',
 });
 
-// Identical badges should hit the same cache entry: sort parameters, drop defaults.
-// E.g. "/brand/react.svg" and "/brand/react.svg?theme=auto&size=md" share one entry.
+/**
+ * Identical badges should hit the same cache entry: sort parameters, drop defaults.
+ * E.g. "/brand/react.svg" and "/brand/react.svg?theme=auto&size=md" share one entry.
+ * @param {URL} url
+ * @returns {string}
+ */
 export function cacheKey(url) {
   const key = new URL(url.origin + url.pathname);
   for (const name of Object.keys(PARAMS).sort()) {
@@ -102,6 +112,11 @@ export function cacheKey(url) {
   return key.toString();
 }
 
+/**
+ * Build the response for a request (without caching).
+ * @param {Request} request
+ * @returns {Response}
+ */
 export function handle(request) {
   const url = new URL(request.url);
   if (url.pathname === '/') {
@@ -111,7 +126,7 @@ export function handle(request) {
   }
   try {
     return new Response(render(url), {
-      headers: svgHeaders('public, max-age=86400, s-maxage=604800, immutable'),
+      headers: svgHeaders('public, max-age=86400, s-maxage=604800'),
     });
   } catch (err) {
     if (!(err instanceof BadgeError)) throw err;

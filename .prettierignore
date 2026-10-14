@@ -1,0 +1,6 @@
+badges/
+GALLERY.md
+dist/
+.wrangler/
+test/__snapshots__/
+package-lock.json

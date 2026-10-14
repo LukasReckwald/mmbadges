@@ -19,6 +19,12 @@ const STATE = {
 // Muted color for icon + label
 const MUTED = { light: '#59636e', dark: '#9198a1' };
 
+/**
+ * Turn "auto" into a concrete state based on a percentage value.
+ * @param {string} state
+ * @param {string} value e.g. "87%"
+ * @returns {string} success | warning | danger | info | neutral
+ */
 export function resolveState(state, value) {
   if (state !== 'auto') return state;
   const n = parseFloat(value);
@@ -32,7 +38,17 @@ const palette = (theme, state) => ({
   value: state === 'neutral' ? NEUTRAL[theme].text : STATE[theme][state],
 });
 
-// icon = result of resolveIcon() from icons.mjs
+/**
+ * Render a two-part status badge.
+ * @param {object} opts
+ * @param {import('./icons.mjs').Icon} opts.icon result of resolveIcon()
+ * @param {string} opts.label left part, e.g. "build"
+ * @param {string} opts.value right part, e.g. "passing"
+ * @param {'success' | 'warning' | 'danger' | 'info' | 'neutral' | 'auto'} [opts.state]
+ * @param {'auto' | 'light' | 'dark'} [opts.theme]
+ * @param {'sm' | 'md' | 'lg'} [opts.size]
+ * @returns {string} SVG document
+ */
 export function renderStatus({ icon, label, value, state = 'neutral', theme = 'auto', size = 'md' }) {
   const { H, PAD, ICON, GAP, FONT } = getSize(size);
   const s = resolveState(state, value);
@@ -47,8 +63,8 @@ export function renderStatus({ icon, label, value, state = 'neutral', theme = 'a
 
   const lw = textWidth(label, FONT);
   const vw = textWidth(value, FONT);
-  const left = PAD + ICON + GAP + lw + PAD - 2;   // icon + label
-  const right = PAD - 2 + vw + PAD;               // value
+  const left = PAD + ICON + GAP + lw + PAD - 2; // icon + label
+  const right = PAD - 2 + vw + PAD; // value
   const w = Math.ceil(left + right);
   const iy = (H - ICON) / 2;
   const t = (x, txt, tw, attr, weight) =>

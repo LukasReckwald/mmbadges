@@ -18,13 +18,33 @@ import { esc } from '../src/lib.mjs';
 const OUT = 'badges';
 
 const DEFAULT = [
-  'javascript', 'typescript', 'python', 'rust', 'go', 'react', 'vuedotjs',
-  'svelte', 'nextdotjs', 'nodedotjs', 'tailwindcss', 'docker', 'kubernetes',
-  'postgresql', 'mongodb', 'redis', 'github', 'githubactions', 'vercel', 'figma',
+  'javascript',
+  'typescript',
+  'python',
+  'rust',
+  'go',
+  'react',
+  'vuedotjs',
+  'svelte',
+  'nextdotjs',
+  'nodedotjs',
+  'tailwindcss',
+  'docker',
+  'kubernetes',
+  'postgresql',
+  'mongodb',
+  'redis',
+  'github',
+  'githubactions',
+  'vercel',
+  'figma',
 ];
 
 const flags = Object.fromEntries(
-  process.argv.slice(2).filter((a) => a.startsWith('--')).map((a) => a.slice(2).split('='))
+  process.argv
+    .slice(2)
+    .filter((a) => a.startsWith('--'))
+    .map((a) => a.slice(2).split('=')),
 );
 const opts = { size: flags.size || 'md', style: flags.style || 'mono' };
 

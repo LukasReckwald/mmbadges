@@ -31,12 +31,19 @@ const DEMO = [
 ];
 
 const flags = Object.fromEntries(
-  process.argv.slice(2).filter((a) => a.startsWith('--')).map((a) => a.slice(2).split('='))
+  process.argv
+    .slice(2)
+    .filter((a) => a.startsWith('--'))
+    .map((a) => a.slice(2).split('=')),
 );
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 
 mkdirSync(OUT, { recursive: true });
-const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const slug = (s) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 
 let count = 0;
 for (const entry of args.length ? args : DEMO) {
