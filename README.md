@@ -2,8 +2,6 @@
 
 # mmbadges
 
-[![license: MIT](https://mmbadges.com/status/lucide:scale/license/MIT.svg)](LICENSE)
-
 **Modern minimal badges** for Markdown: pill-shaped, with brand logos from [Simple Icons](https://simpleicons.org), line icons from [Lucide](https://lucide.dev), and automatic light and dark mode from a single URL.
 
 > 🚧 Early development – URLs and options may still change.
@@ -127,4 +125,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the project structure and guidelines.
 
 ## License
 
-[MIT](LICENSE)
+[![license: MIT](https://mmbadges.com/status/lucide:scale/license/MIT.svg)](LICENSE)
