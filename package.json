@@ -1,0 +1,27 @@
+{
+  "name": "mmbadges",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Modern minimal badges for Markdown. Clean pills, real brand logos, light and dark mode.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node cli/brands.mjs && node cli/status.mjs",
+    "brands": "node cli/brands.mjs",
+    "status": "node cli/status.mjs",
+    "test": "vitest run",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "lucide-static": "^1.0.0",
+    "simple-icons": "^16.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.4",
+    "wrangler": "^4.151.0"
+  },
+  "license": "MIT"
+}

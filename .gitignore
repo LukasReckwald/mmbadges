@@ -1,0 +1,8 @@
+node_modules/
+badges/
+GALLERY.md
+dist/
+.wrangler/
+.dev.vars
+.env
+.DS_Store
