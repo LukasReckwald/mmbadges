@@ -14,3 +14,7 @@ routes = [
 [assets]
 directory = "./site/dist"
 run_worker_first = ["/brand/*", "/status/*"]
+
+# Exposes the deployment ID to the worker (used in the cache key)
+[version_metadata]
+binding = "CF_VERSION_METADATA"

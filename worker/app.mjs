@@ -101,15 +101,19 @@ const svgHeaders = (cache) => ({
 /**
  * Identical badges should hit the same cache entry: sort parameters, drop defaults.
  * E.g. "/brand/react.svg" and "/brand/react.svg?theme=auto&size=md" share one entry.
+ * With a `version` (the deployment ID), every deploy starts with a fresh cache, so
+ * design changes show up immediately instead of after the cache expires.
  * @param {URL} url
+ * @param {string} [version]
  * @returns {string}
  */
-export function cacheKey(url) {
+export function cacheKey(url, version) {
   const key = new URL(url.origin + url.pathname);
   for (const name of Object.keys(PARAMS).sort()) {
     const v = url.searchParams.get(name);
     if (v !== null && v !== PARAMS[name].def) key.searchParams.set(name, v);
   }
+  if (version) key.searchParams.set('_v', version);
   return key.toString();
 }
 

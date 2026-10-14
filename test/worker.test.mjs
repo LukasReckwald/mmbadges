@@ -74,4 +74,10 @@ describe('cacheKey', () => {
     expect(a).toBe(b);
     expect(a).toBe('https://x.test/brand/react.svg?style=brand');
   });
+
+  it('includes the deployment version so a deploy starts with a fresh cache', () => {
+    const url = new URL('https://x.test/brand/react.svg');
+    expect(cacheKey(url, 'v1')).not.toBe(cacheKey(url, 'v2'));
+    expect(cacheKey(url, 'v1')).toBe('https://x.test/brand/react.svg?_v=v1');
+  });
 });

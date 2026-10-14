@@ -11,8 +11,9 @@ export default {
 
     // Cloudflare edge cache (per data center). Note: the Cache API only works on the
     // custom domain (mmbadges.com), not on *.workers.dev.
+    // The deployment ID in the key makes every deploy start with a fresh cache.
     const cache = caches.default;
-    const key = new Request(cacheKey(new URL(request.url)));
+    const key = new Request(cacheKey(new URL(request.url), env.CF_VERSION_METADATA?.id));
     const hit = await cache.match(key);
     if (hit) return hit;
 
