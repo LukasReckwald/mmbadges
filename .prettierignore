@@ -4,3 +4,5 @@ dist/
 .wrangler/
 test/__snapshots__/
 package-lock.json
+site/dist/
+site/src/generated/

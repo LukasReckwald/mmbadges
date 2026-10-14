@@ -8,7 +8,8 @@ Thanks for your interest! Bug reports, ideas and pull requests are welcome.
 nvm use           # Node.js 22, see .nvmrc
 npm install
 npm test
-npm run dev       # worker on http://localhost:8787
+npm run dev       # gallery + worker on http://localhost:8787
+npm run site:dev  # gallery with hot reload on http://localhost:5173 (run `npm run dev` alongside)
 ```
 
 ## Project structure
@@ -22,6 +23,10 @@ src/      pure render functions – no file system, no network, no CLI
   status.mjs    status badges
 cli/      thin wrappers that write SVG files
 worker/   thin wrapper that serves SVGs over HTTP (Cloudflare Worker)
+site/     gallery website (React + Vite), served as static assets by the same worker
+  scripts/      builds the search index from simple-icons and lucide-static
+  src/lib/      pure helpers (URLs, snippets, search) – tested in test/site.test.mjs
+  src/components/  React components (hero, logo gallery, status builder)
 test/     vitest tests and snapshots
 ```
 

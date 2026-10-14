@@ -8,7 +8,7 @@ Modern minimal badges for Markdown. Clean pills, real brand logos (3000+ from [S
 
 ## Usage
 
-Paste a URL into any Markdown file:
+Pick a logo and copy the snippet in the **[gallery](https://mmbadges.mmbadges.workers.dev)**, or paste a URL into any Markdown file:
 
 ```md
 ![React](https://mmbadges.mmbadges.workers.dev/brand/react.svg)
@@ -91,7 +91,8 @@ Requires Node.js 22 (see `.nvmrc`).
 ```sh
 npm install
 npm test          # unit and worker tests (vitest)
-npm run dev       # run the worker locally on http://localhost:8787
+npm run dev       # build the gallery and run the worker on http://localhost:8787
+npm run site:dev  # gallery with hot reload on http://localhost:5173 (needs `npm run dev` for the badges)
 npm run format    # format code with Prettier
 ```
 
@@ -100,7 +101,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the project structure and guidelines.
 ## Roadmap
 
 - [x] Badge service on Cloudflare Workers
-- [ ] Gallery website with search and copy buttons
+- [x] Gallery website with search and copy buttons
 - [ ] Live badges (GitHub Actions, stars, npm, Codecov)
 
 ## Credits

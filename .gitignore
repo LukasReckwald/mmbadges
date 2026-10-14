@@ -6,3 +6,5 @@ dist/
 .dev.vars
 .env
 .DS_Store
+site/dist/
+site/src/generated/

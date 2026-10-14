@@ -1,6 +1,6 @@
 {
   "name": "mmbadges",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Modern minimal badges for Markdown. Clean pills, real brand logos, light and dark mode.",
   "type": "module",
@@ -14,15 +14,22 @@
     "test": "vitest run",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "site:index": "node site/scripts/build-index.mjs",
+    "site:dev": "npm run site:index && vite --config site/vite.config.js",
+    "site:build": "npm run site:index && vite build --config site/vite.config.js",
+    "dev": "npm run site:build && wrangler dev",
+    "deploy": "npm run site:build && wrangler deploy"
   },
   "dependencies": {
     "lucide-static": "^1.0.0",
     "simple-icons": "^16.0.0"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
     "prettier": "^3.9.10",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "vite": "^8.3.4",
     "vitest": "^5.0.4",
     "wrangler": "^4.151.0"
   },
