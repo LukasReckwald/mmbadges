@@ -19,7 +19,8 @@
     "site:build": "npm run site:index && vite build --config site/vite.config.js",
     "dev": "npm run site:build && wrangler dev",
     "deploy": "npm run site:build && wrangler deploy",
-    "examples": "node cli/examples.mjs"
+    "examples": "node cli/examples.mjs",
+    "banner": "node cli/banner.mjs"
   },
   "dependencies": {
     "lucide-static": "^1.0.0",

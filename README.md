@@ -1,3 +1,5 @@
+![mmbadges – modern minimal badges for Markdown](docs/banner.svg)
+
 # mmbadges
 
 [![license: MIT](https://mmbadges.com/status/lucide:scale/license/MIT.svg)](LICENSE)
