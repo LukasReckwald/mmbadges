@@ -1,7 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import { brandUrl, statusUrl, snippet } from '../site/src/lib/urls.js';
 import { searchBrands } from '../site/src/lib/search.js';
-import worker, { cacheKey } from '../worker/index.mjs';
+import worker from '../worker/index.mjs';
+import { cacheKey } from '../worker/app.mjs';
 
 const BASE = 'https://badges.test';
 

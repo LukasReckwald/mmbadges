@@ -5,8 +5,8 @@ compatibility_date = "2026-09-01"
 # Cloudflare creates the DNS record and TLS certificate on deploy
 routes = [{ pattern = "mmbadges.com", custom_domain = true }]
 
-# The gallery (built by `npm run site:build`). Requests matching a file are served
-# directly as static assets (free, no worker invocation); everything else, like
-# /brand/… and /status/…, runs the worker.
+# The gallery (built by `npm run site:build`) is served as static assets – free,
+# no worker invocation. Only badge routes run the worker.
 [assets]
 directory = "./site/dist"
+run_worker_first = ["/brand/*", "/status/*"]

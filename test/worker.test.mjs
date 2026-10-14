@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import worker, { cacheKey } from '../worker/index.mjs';
+import worker from '../worker/index.mjs';
+import { cacheKey } from '../worker/app.mjs';
 
 // Node has no Cloudflare Cache API, so we use a tiny stand-in
 const store = new Map();
