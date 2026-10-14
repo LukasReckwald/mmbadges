@@ -125,4 +125,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the project structure and guidelines.
 
 ## License
 
-[![license: MIT](https://mmbadges.com/status/lucide:scale/license/MIT.svg)](LICENSE)
+[![license: MIT](https://mmbadges.com/status/lucide:scale/license/MIT.svg?size=lg)](LICENSE)
