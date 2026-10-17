@@ -4,7 +4,8 @@
 // light variant clipped to the left half, dark variant clipped to the right half – so a
 // badge that crosses the middle switches its theme exactly at the edge.
 //
-// Usage: npm run banner
+// Usage: npm run banner          -> docs/banner.svg (README, 1280×400)
+//        npm run banner -- --og  -> site/public/og.png (link previews, 1200×630)
 
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { renderBrand } from '../src/brands.mjs';
@@ -12,8 +13,12 @@ import { renderStatus } from '../src/status.mjs';
 import { brandIcon, resolveIcon } from '../src/icons.mjs';
 import { FONT_STACK } from '../src/lib.mjs';
 
-const W = 1280;
-const H = 400;
+// --og renders the same design as a 1200×630 PNG for link previews (Open Graph);
+// social networks don't accept SVG there.
+const OG = process.argv.includes('--og');
+const W = OG ? 1200 : 1280;
+const H = OG ? 630 : 400;
+const ZOOM = OG ? 1.25 : 1; // larger badges and text on the taller preview image
 const MID = W / 2;
 
 // Badges to scatter: [kind, ...args]
@@ -76,13 +81,13 @@ const BADGES = [
 
 // Three depth layers: back (small, faint, blurred) → front (large, with shadow)
 const LAYERS = [
-  { scale: 0.75, opacity: 0.5, filter: 'url(#blur)', count: 22 },
-  { scale: 1, opacity: 0.8, filter: '', count: 18 },
-  { scale: 1.4, opacity: 1, filter: 'url(#shadow)', count: 12 },
+  { scale: 0.75 * ZOOM, opacity: 0.5, filter: 'url(#blur)', count: 22 },
+  { scale: 1 * ZOOM, opacity: 0.8, filter: '', count: 18 },
+  { scale: 1.4 * ZOOM, opacity: 1, filter: 'url(#shadow)', count: 12 },
 ];
 
 // Area kept free for the wordmark
-const CENTER = { x: MID - 270, y: H / 2 - 74, w: 540, h: 148 };
+const CENTER = { x: MID - 270 * ZOOM, y: H / 2 - 74 * ZOOM, w: 540 * ZOOM, h: 148 * ZOOM };
 
 // Small seeded random generator (mulberry32), so the banner looks the same on every run
 function rng(seed) {
@@ -132,7 +137,7 @@ const placed = [];
 for (const [li, spec, y, share] of CROSSING) {
   const layer = LAYERS[li];
   const { w, h } = sizeOf(render(spec, 'light'));
-  const box = { w: w * layer.scale, h: h * layer.scale, y };
+  const box = { w: w * layer.scale, h: h * layer.scale, y: (y * H) / 400 }; // y is given for the 400px banner
   box.x = MID - box.w * share;
   placed.push({ spec, box, layer });
 }
@@ -174,14 +179,14 @@ for (const [li] of LAYERS.entries()) {
 
 // Wordmark: dark text on the light half, light text on the dark half
 const text = (fill) =>
-  `<text x="${MID}" y="${H / 2 + 6}" text-anchor="middle" fill="${fill}" font-family="${FONT_STACK}" font-size="92" font-weight="700" letter-spacing="-3">mmbadges</text>` +
-  `<text x="${MID}" y="${H / 2 + 52}" text-anchor="middle" fill="${fill}" opacity="0.6" font-family="${FONT_STACK}" font-size="20" font-weight="500">modern minimal badges for Markdown</text>`;
+  `<text x="${MID}" y="${H / 2 + 6}" text-anchor="middle" fill="${fill}" font-family="${FONT_STACK}" font-size="${92 * ZOOM}" font-weight="700" letter-spacing="-3">mmbadges</text>` +
+  `<text x="${MID}" y="${H / 2 + 52 * ZOOM}" text-anchor="middle" fill="${fill}" opacity="0.6" font-family="${FONT_STACK}" font-size="${20 * ZOOM}" font-weight="500">modern minimal badges for Markdown</text>`;
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="mmbadges – modern minimal badges for Markdown">
 <defs>
 <clipPath id="clip-light"><rect width="${MID}" height="${H}"/></clipPath>
 <clipPath id="clip-dark"><rect x="${MID}" width="${MID}" height="${H}"/></clipPath>
-<clipPath id="clip-banner"><rect width="${W}" height="${H}" rx="16"/></clipPath>
+<clipPath id="clip-banner"><rect width="${W}" height="${H}" rx="${OG ? 0 : 16}"/></clipPath>
 <linearGradient id="bg-light" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef0f3"/></linearGradient>
 <linearGradient id="bg-dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#161b22"/><stop offset="1" stop-color="#0b0e13"/></linearGradient>
 <radialGradient id="fade-light" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
@@ -193,12 +198,20 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
 <rect width="${MID}" height="${H}" fill="url(#bg-light)"/>
 <rect x="${MID}" width="${MID}" height="${H}" fill="url(#bg-dark)"/>
 ${badgesSvg}
-<g clip-path="url(#clip-light)"><ellipse cx="${MID}" cy="${H / 2 + 14}" rx="340" ry="120" fill="url(#fade-light)"/>${text('#1f2328')}</g>
-<g clip-path="url(#clip-dark)"><ellipse cx="${MID}" cy="${H / 2 + 14}" rx="340" ry="120" fill="url(#fade-dark)"/>${text('#f0f6fc')}</g>
+<g clip-path="url(#clip-light)"><ellipse cx="${MID}" cy="${H / 2 + 14}" rx="${340 * ZOOM}" ry="${120 * ZOOM}" fill="url(#fade-light)"/>${text('#1f2328')}</g>
+<g clip-path="url(#clip-dark)"><ellipse cx="${MID}" cy="${H / 2 + 14}" rx="${340 * ZOOM}" ry="${120 * ZOOM}" fill="url(#fade-dark)"/>${text('#f0f6fc')}</g>
 </g>
 </svg>
 `;
 
-mkdirSync('docs', { recursive: true });
-writeFileSync('docs/banner.svg', svg);
-console.log(`docs/banner.svg written: ${placed.length} badges, ${(svg.length / 1024).toFixed(0)} KB`);
+if (OG) {
+  // Render to PNG with resvg (uses the system fonts, like a browser would)
+  const { Resvg } = await import('@resvg/resvg-js');
+  const png = new Resvg(svg, { font: { loadSystemFonts: true } }).render().asPng();
+  writeFileSync('site/public/og.png', png);
+  console.log(`site/public/og.png written: ${placed.length} badges, ${(png.length / 1024).toFixed(0)} KB`);
+} else {
+  mkdirSync('docs', { recursive: true });
+  writeFileSync('docs/banner.svg', svg);
+  console.log(`docs/banner.svg written: ${placed.length} badges, ${(svg.length / 1024).toFixed(0)} KB`);
+}

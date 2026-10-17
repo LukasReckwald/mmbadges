@@ -1,0 +1,16 @@
+name: Feature request
+description: A new badge type, live data source or option
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like?
+      description: For a new live badge, name the service and the value you want to show.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it useful?
+      description: Where would you use it? mmbadges stays minimal, so please explain the use case.

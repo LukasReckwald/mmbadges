@@ -1,0 +1,54 @@
+/* Shared styles for the static legal pages (imprint, privacy) */
+:root {
+  --bg: #f7f7f8;
+  --text: #18181b;
+  --muted: #63636b;
+  --line: #e4e4e7;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e0e10;
+    --text: #ececef;
+    --muted: #a0a0a8;
+    --line: #2a2a2e;
+  }
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    15px/1.6 -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+h1 {
+  font-size: 24px;
+  margin: 32px 0 8px;
+}
+h2 {
+  font-size: 16px;
+  margin: 32px 0 6px;
+}
+.back {
+  color: var(--muted);
+  text-decoration: none;
+}
+.note {
+  color: var(--muted);
+  border-left: 2px solid var(--line);
+  padding-left: 12px;
+}

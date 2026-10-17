@@ -18,3 +18,7 @@ run_worker_first = ["/brand/*", "/status/*", "/github/*", "/npm/*", "/codecov/*"
 # Exposes the deployment ID to the worker (used in the cache key)
 [version_metadata]
 binding = "CF_VERSION_METADATA"
+
+# Workers Logs: errors and request metadata, kept for 3 days (free plan)
+[observability]
+enabled = true

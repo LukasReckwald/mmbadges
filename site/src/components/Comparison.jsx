@@ -1,39 +1,40 @@
 import { BASE } from '../lib/base.js';
 import { brandUrl, statusUrl } from '../lib/urls.js';
 
-const SHIELDS = 'https://img.shields.io/badge';
+// Local copies of shields.io badges, see site/scripts/fetch-comparison.mjs
+const SHIELDS = '/compare';
 
 // The same information from shields.io – in the styles people commonly use: "for-the-badge"
 // for technology logos, the default "flat" for status badges – and from mmbadges
 const ROWS = [
   {
     name: 'React',
-    shields: `${SHIELDS}/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB`,
+    shields: `${SHIELDS}/react.svg`,
     mm: brandUrl(BASE, 'react', { style: 'brand' }),
   },
   {
     name: 'TypeScript',
-    shields: `${SHIELDS}/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white`,
+    shields: `${SHIELDS}/typescript.svg`,
     mm: brandUrl(BASE, 'typescript', { style: 'brand' }),
   },
   {
     name: 'Docker',
-    shields: `${SHIELDS}/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white`,
+    shields: `${SHIELDS}/docker.svg`,
     mm: brandUrl(BASE, 'docker', { style: 'brand' }),
   },
   {
     name: 'build: passing',
-    shields: `${SHIELDS}/build-passing-brightgreen?logo=githubactions&logoColor=white`,
+    shields: `${SHIELDS}/build.svg`,
     mm: statusUrl(BASE, { icon: 'si:githubactions', label: 'build', value: 'passing' }, { state: 'success' }),
   },
   {
     name: 'coverage: 94%',
-    shields: `${SHIELDS}/coverage-94%25-brightgreen`,
+    shields: `${SHIELDS}/coverage.svg`,
     mm: statusUrl(BASE, { icon: 'lucide:shield-check', label: 'coverage', value: '94%' }, { state: 'auto' }),
   },
   {
     name: 'license: MIT',
-    shields: `${SHIELDS}/license-MIT-blue`,
+    shields: `${SHIELDS}/license.svg`,
     mm: statusUrl(BASE, { icon: 'lucide:scale', label: 'license', value: 'MIT' }),
   },
 ];

@@ -1,0 +1,40 @@
+name: Bug report
+description: A badge looks wrong, shows an error or doesn't load
+labels: [bug]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Badge URL
+      description: The full URL of the affected badge
+      placeholder: https://mmbadges.com/brand/react.svg?style=tint
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What's wrong?
+      description: What did you expect, and what do you see instead? A screenshot helps.
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where is the badge shown?
+      options:
+        - GitHub README
+        - GitLab
+        - npm
+        - Website / docs
+        - mmbadges.com builder
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Color scheme
+      options:
+        - Light
+        - Dark
+        - Both

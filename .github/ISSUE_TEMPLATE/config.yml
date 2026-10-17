@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Missing brand logo
+    url: https://github.com/simple-icons/simple-icons/issues/new/choose
+    about: Brand logos come from Simple Icons – request new logos there. They appear on mmbadges after the next update.

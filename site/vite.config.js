@@ -8,6 +8,8 @@ export default defineConfig({
   build: { outDir: 'dist', emptyOutDir: true },
   server: {
     // In development the badges come from `npm run dev` (wrangler on port 8787)
-    proxy: { '/brand': 'http://localhost:8787', '/status': 'http://localhost:8787' },
+    proxy: Object.fromEntries(
+      ['/brand', '/status', '/github', '/npm', '/codecov'].map((path) => [path, 'http://localhost:8787']),
+    ),
   },
 });

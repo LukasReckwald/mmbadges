@@ -20,7 +20,8 @@ export default function App() {
       </main>
       <footer className="footer">
         <p>
-          MIT licensed · <a href="https://github.com/LukasReckwald/mmbadges">Source on GitHub</a>
+          MIT licensed · <a href="https://github.com/LukasReckwald/mmbadges">Source on GitHub</a> ·{' '}
+          <a href="/imprint">Legal notice</a> · <a href="/privacy">Privacy</a>
         </p>
         <p>
           Brand icons by <a href="https://simpleicons.org">Simple Icons</a> (CC0). Brand names and logos are trademarks
