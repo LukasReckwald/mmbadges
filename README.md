@@ -4,7 +4,8 @@
 
 **Modern minimal badges** for Markdown: pill-shaped, with brand logos from [Simple Icons](https://simpleicons.org), line icons from [Lucide](https://lucide.dev), and automatic light and dark mode from a single URL.
 
-> 🚧 Early development – URLs and options may still change.
+> [!NOTE]
+> The hosted service at mmbadges.com is **offline for now**. You can still generate every badge as an SVG file with the CLI – see [Generate files locally](#generate-files-locally). The URLs below describe how the service works when it is online.
 
 ## Examples
 
@@ -16,16 +17,16 @@ Without `theme`, every badge switches between its light and dark variant automat
 
 The same badges from [shields.io](https://shields.io), in the styles they are most often used in (`for-the-badge` for logos, the default `flat` for status), and from mmbadges. shields.io offers many more badge types and integrations; mmbadges focuses on a different look and automatic dark mode.
 
-| Badge          | shields.io                                                                                                               | mmbadges                                                                                        |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| React          | ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)            | ![React](https://mmbadges.com/brand/react.svg?style=brand)                                      |
-| TypeScript     | ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) | ![TypeScript](https://mmbadges.com/brand/typescript.svg?style=brand)                            |
-| build: passing | ![build: passing](https://img.shields.io/badge/build-passing-brightgreen?logo=githubactions&logoColor=white)             | ![build: passing](https://mmbadges.com/status/si:githubactions/build/passing.svg?state=success) |
-| coverage: 94%  | ![coverage: 94%](https://img.shields.io/badge/coverage-94%25-brightgreen)                                                | ![coverage: 94%](https://mmbadges.com/status/lucide:shield-check/coverage/94%25.svg?state=auto) |
+| Badge          | shields.io                                                                                                               | mmbadges                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| React          | ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)            | ![React](docs/badges/react-brand.svg)            |
+| TypeScript     | ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) | ![TypeScript](docs/badges/typescript-brand.svg)  |
+| build: passing | ![build: passing](https://img.shields.io/badge/build-passing-brightgreen?logo=githubactions&logoColor=white)             | ![build: passing](docs/badges/build-passing.svg) |
+| coverage: 94%  | ![coverage: 94%](https://img.shields.io/badge/coverage-94%25-brightgreen)                                                | ![coverage: 94%](docs/badges/coverage-94.svg)    |
 
 ## Usage
 
-Build a badge and copy the snippet on **[mmbadges.com](https://mmbadges.com)**, or paste a URL into any Markdown file:
+Once the service is online, build a badge and copy the snippet on **[mmbadges.com](https://mmbadges.com)**, or paste a URL into any Markdown file:
 
 ```md
 ![React](https://mmbadges.com/brand/react.svg)
@@ -144,4 +145,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the project structure and guidelines.
 
 ## License
 
-[![license: MIT](https://mmbadges.com/status/lucide:scale/license/MIT.svg?size=lg)](LICENSE)
+[![license: MIT](docs/badges/license-mit.svg)](LICENSE)

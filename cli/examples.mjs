@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Generates docs/examples.svg for the README: every style and some status badges,
+// Generates docs/examples.svg and docs/badges/*.svg for the README: every style and some status badges,
 // once on a light and once on a dark surface. GitHub strips styling from Markdown
 // tables, so one image is the only way to show both backgrounds side by side.
 //
@@ -82,3 +82,26 @@ ${dark.svg}
 mkdirSync('docs', { recursive: true });
 writeFileSync('docs/examples.svg', svg);
 console.log(`docs/examples.svg written (${WIDTH}×${height})`);
+
+// Single badges used in the README, as files – so the README doesn't depend on the
+// hosted service being online. All use theme=auto.
+const README_BADGES = {
+  'license-mit': renderStatus({ icon: resolveIcon('lucide:scale'), label: 'license', value: 'MIT', size: 'lg' }),
+  'react-brand': renderBrand({ icon: brandIcon('react'), style: 'brand' }),
+  'typescript-brand': renderBrand({ icon: brandIcon('typescript'), style: 'brand' }),
+  'build-passing': renderStatus({
+    icon: resolveIcon('si:githubactions'),
+    label: 'build',
+    value: 'passing',
+    state: 'success',
+  }),
+  'coverage-94': renderStatus({
+    icon: resolveIcon('lucide:shield-check'),
+    label: 'coverage',
+    value: '94%',
+    state: 'auto',
+  }),
+};
+mkdirSync('docs/badges', { recursive: true });
+for (const [name, badge] of Object.entries(README_BADGES)) writeFileSync(`docs/badges/${name}.svg`, badge);
+console.log(`docs/badges/: ${Object.keys(README_BADGES).length} badges written`);
