@@ -1,6 +1,6 @@
 node_modules/
-badges/
-GALLERY.md
+/badges/
+/GALLERY.md
 dist/
 .wrangler/
 .dev.vars

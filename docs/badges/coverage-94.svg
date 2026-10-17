@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="24" viewBox="0 0 128 24" role="img" aria-label="coverage: 94%">
+<title>coverage: 94%</title>
+<style>.mm-bg{fill:#f6f8fa;stroke:#d0d7de}.mm-sep{stroke:#d0d7de}.mm-icon{stroke:#59636e}.mm-label{fill:#59636e}.mm-value{fill:#1a7f37}@media (prefers-color-scheme:dark){.mm-bg{fill:#161b22;stroke:#3d444d}.mm-sep{stroke:#3d444d}.mm-icon{stroke:#9198a1}.mm-label{fill:#9198a1}.mm-value{fill:#3fb950}}</style>
+<rect x="0.5" y="0.5" width="127" height="23" rx="11.5" class="mm-bg"/>
+<line x1="87.7" y1="5" x2="87.7" y2="19" class="mm-sep"/>
+<g transform="translate(9 5) scale(0.5833333333333334)" fill="none" class="mm-icon" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></g>
+<text x="28" y="12" dominant-baseline="central" class="mm-label" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="500" textLength="52.7" lengthAdjust="spacingAndGlyphs">coverage</text>
+<text x="94.7" y="12" dominant-baseline="central" class="mm-value" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="600" textLength="24" lengthAdjust="spacingAndGlyphs">94%</text>
+</svg>
