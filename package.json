@@ -23,7 +23,7 @@
     "banner": "node cli/banner.mjs"
   },
   "dependencies": {
-    "lucide-static": "^1.0.0",
+    "lucide-static": "^1.61.0",
     "simple-icons": "^16.0.0"
   },
   "devDependencies": {
