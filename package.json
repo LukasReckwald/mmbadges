@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "lucide-static": "^1.0.0",
-    "simple-icons": "^16.0.0"
+    "simple-icons": "^16.37.0"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
